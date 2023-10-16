@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -13,6 +13,12 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OrdoBooks.DataAccsess\OrdoBooks.DataAccsess.csproj" />
+    <ProjectReference Include="..\OrdoBooks.Model\OrdoBooks.Model.csproj" />
+    <ProjectReference Include="..\OrdoBooks.Utility\OrdoBooks.Utility.csproj" />
   </ItemGroup>
 
 </Project>

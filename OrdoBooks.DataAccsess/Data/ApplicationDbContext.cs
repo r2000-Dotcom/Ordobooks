@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using OrdoBooksWeb.Models;
+using OrdoBooks.Model;
 
-namespace OrdoBooksWeb.Data
+namespace OrdoBooks.DataAccsess.Data
 {
     public class ApplicationDbContext :DbContext
     {

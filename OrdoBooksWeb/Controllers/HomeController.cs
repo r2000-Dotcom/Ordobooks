@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using OrdoBooksWeb.Models;
+using OrdoBooks.Model;
 using System.Diagnostics;
 
 namespace OrdoBooksWeb.Controllers

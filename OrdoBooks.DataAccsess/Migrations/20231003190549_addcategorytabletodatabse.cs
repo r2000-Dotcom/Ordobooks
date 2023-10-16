@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace OrdoBooksWeb.Migrations
+namespace OrdoBooks.DataAccsess.Migrations
 {
     /// <inheritdoc />
     public partial class addcategorytabletodatabse : Migration

@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.7.33711.374
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdoBooksWeb", "OrdoBooksWeb\OrdoBooksWeb.csproj", "{9EFA31FE-16BA-4CCF-AF25-16BB91BA5243}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrdoBooksWeb", "OrdoBooksWeb\OrdoBooksWeb.csproj", "{9EFA31FE-16BA-4CCF-AF25-16BB91BA5243}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdoBooks.DataAccsess", "OrdoBooks.DataAccsess\OrdoBooks.DataAccsess.csproj", "{10A726A8-37EB-4910-92EC-ECBF51919DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdoBooks.Model", "OrdoBooks.Model\OrdoBooks.Model.csproj", "{A7EBA127-89D5-4DBA-992E-ED8732C016E0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrdoBooks.Utility", "OrdoBooks.Utility\OrdoBooks.Utility.csproj", "{263ACAD2-6FAD-4562-BAAC-AFF1DB9F0E96}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{9EFA31FE-16BA-4CCF-AF25-16BB91BA5243}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9EFA31FE-16BA-4CCF-AF25-16BB91BA5243}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9EFA31FE-16BA-4CCF-AF25-16BB91BA5243}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10A726A8-37EB-4910-92EC-ECBF51919DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10A726A8-37EB-4910-92EC-ECBF51919DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10A726A8-37EB-4910-92EC-ECBF51919DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10A726A8-37EB-4910-92EC-ECBF51919DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A7EBA127-89D5-4DBA-992E-ED8732C016E0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A7EBA127-89D5-4DBA-992E-ED8732C016E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A7EBA127-89D5-4DBA-992E-ED8732C016E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A7EBA127-89D5-4DBA-992E-ED8732C016E0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{263ACAD2-6FAD-4562-BAAC-AFF1DB9F0E96}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{263ACAD2-6FAD-4562-BAAC-AFF1DB9F0E96}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{263ACAD2-6FAD-4562-BAAC-AFF1DB9F0E96}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{263ACAD2-6FAD-4562-BAAC-AFF1DB9F0E96}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

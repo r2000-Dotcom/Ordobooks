@@ -1,4 +1,4 @@
-namespace OrdoBooksWeb.Models
+namespace OrdoBooks.Model
 {
     public class ErrorViewModel
     {

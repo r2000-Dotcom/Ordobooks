@@ -4,11 +4,12 @@ using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using OrdoBooksWeb.Data;
+using OrdoBooks.DataAccsess.Data;
+
 
 #nullable disable
 
-namespace OrdoBooksWeb.Migrations
+namespace OrdoBooks.DataAccsess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20231007182115_seedBookCategorytable")]

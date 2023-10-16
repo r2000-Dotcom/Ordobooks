@@ -1,5 +1,5 @@
 using Microsoft.EntityFrameworkCore;
-using OrdoBooksWeb.Data;
+using OrdoBooks.DataAccsess.Data;
 
 var builder = WebApplication.CreateBuilder(args);
 

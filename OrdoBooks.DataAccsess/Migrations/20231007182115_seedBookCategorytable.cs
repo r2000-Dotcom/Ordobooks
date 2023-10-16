@@ -4,7 +4,7 @@
 
 #pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
 
-namespace OrdoBooksWeb.Migrations
+namespace OrdoBooks.DataAccsess.Migrations
 {
     /// <inheritdoc />
     public partial class seedBookCategorytable : Migration
