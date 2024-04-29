@@ -5,12 +5,7 @@
     </script>
     <script type="text/javascript">
         toastr.success(' @TempData["Succsess"]')</script>
-    
-
-       
-    
-
-}
+  }
 @if (TempData["error"] != null)
 {
      <script src="~/lib/jquery/dist/jquery.min.js"></script>
@@ -20,5 +15,4 @@
     </script>
     <script type="text/javascript">
         toastr.success(' @TempData["error"]')</script>
-
 }

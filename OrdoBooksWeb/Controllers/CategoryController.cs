@@ -1,25 +1,22 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OrdoBooks.DataAccsess.Data;
+using OrdoBooks.DataAccsess.Repository.IRepositroy;
 using OrdoBooks.Model;
 
 namespace OrdoBooksWeb.Controllers
 {
     public class CategoryController : Controller
     {
-        private ApplicationDbContext _context;
+        private readonly IUnitofWork _iunitwork;
 
-        public CategoryController( ApplicationDbContext dbContext)
+        public CategoryController(IUnitofWork dbContext)
         {
-            _context = dbContext;
-            
+            _iunitwork = dbContext;
+
         }
-
-
-
-
         public IActionResult Index()
         {
-            var CategotyList = _context.BookCategories.OrderBy(x=>x.DisplayOrder).ToList(); 
+            var CategotyList = _iunitwork.CategotyRepository.GetAll().OrderBy(x => x.DisplayOrder).ToList();
             return View(CategotyList);
         }
         public IActionResult CreateNewCategory()
@@ -28,25 +25,27 @@ namespace OrdoBooksWeb.Controllers
         }
         [HttpPost]
         public IActionResult CreateNewCategory(BookCategory obj)
-        { if(obj.Name != null)
+        {
+            if (obj.Name != null)
             {
                 if (obj != null && obj.Name.ToLower() == obj.DisplayOrder.ToString())
                 {
                     ModelState.AddModelError("Name", "Name and Display Order Can not be same ");
                 }
             }
-           
 
-            if(ModelState.IsValid) { 
-            if (obj != null)
+
+            if (ModelState.IsValid)
             {
-                _context.BookCategories.Add(obj);
-                _context.SaveChanges();
+                if (obj != null)
+                {
+                    _iunitwork.CategotyRepository.Add(obj);
+                    _iunitwork.CategotyRepository.save();
                     TempData["Succsess"] = "Category Created Succsessfully";
                     return RedirectToAction("Index");
                 }
             }
-          return View();
+            return View();
         }
         public IActionResult EditCategory(int? id)
         {
@@ -55,9 +54,10 @@ namespace OrdoBooksWeb.Controllers
                 return NotFound();
             }
 
-            var category = _context.BookCategories.Where(x => x.CategoryId == id).FirstOrDefault();
-            if (category == null) {
-            return NotFound();
+            var category = _iunitwork.CategotyRepository.GetById(x => x.CategoryId == id);
+            if (category == null)
+            {
+                return NotFound();
             }
 
             return View(category);
@@ -69,8 +69,8 @@ namespace OrdoBooksWeb.Controllers
             {
                 if (obj != null)
                 {
-                    _context.BookCategories.Update(obj);
-                    _context.SaveChanges();
+                    _iunitwork.CategotyRepository.Update(obj);
+                    _iunitwork.CategotyRepository.save();
                     TempData["Succsess"] = "Category Edited Succsessfully";
                     return RedirectToAction("Index");
                 }
@@ -84,7 +84,7 @@ namespace OrdoBooksWeb.Controllers
                 return NotFound();
             }
 
-            var category = _context.BookCategories.Where(x => x.CategoryId == id).FirstOrDefault();
+            var category = _iunitwork.CategotyRepository.GetById(x => x.CategoryId == id);
             if (category == null)
             {
                 return NotFound();
@@ -92,15 +92,15 @@ namespace OrdoBooksWeb.Controllers
 
             return View(category);
         }
-        [HttpPost,ActionName("Delete")]
+        [HttpPost, ActionName("Delete")]
         public IActionResult DeletePost(BookCategory obj)
         {
             if (ModelState.IsValid)
             {
                 if (obj != null)
                 {
-                    _context.BookCategories.Remove(obj);
-                    _context.SaveChanges();
+                    _iunitwork.CategotyRepository.Remove(obj);
+                    _iunitwork.CategotyRepository.save();
                     TempData["Succsess"] = "Category Deleted Succsessfully";
                     return RedirectToAction("Index");
                 }

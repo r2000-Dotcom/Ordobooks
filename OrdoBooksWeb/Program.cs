@@ -1,13 +1,15 @@
 using Microsoft.EntityFrameworkCore;
 using OrdoBooks.DataAccsess.Data;
+using OrdoBooks.DataAccsess.Repository;
+using OrdoBooks.DataAccsess.Repository.IRepositroy;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<ApplicationDbContext>(options=>
+builder.Services.AddDbContext<ApplicationDbContext>(options=>               
 options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IUnitofWork,UnitofWork>();
 
 
 
