@@ -2,8 +2,9 @@
 using OrdoBooks.Model;
 using System.Diagnostics;
 
-namespace OrdoBooksWeb.Controllers
+namespace OrdoBooksWeb.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

@@ -3,8 +3,9 @@ using OrdoBooks.DataAccsess.Data;
 using OrdoBooks.DataAccsess.Repository.IRepositroy;
 using OrdoBooks.Model;
 
-namespace OrdoBooksWeb.Controllers
+namespace OrdoBooksWeb.Areas.Admin.Controllers
 {
+    [Area("Admin")]
     public class CategoryController : Controller
     {
         private readonly IUnitofWork _iunitwork;

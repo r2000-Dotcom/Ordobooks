@@ -9,7 +9,7 @@ namespace OrdoBooks.DataAccsess.Repository.IRepositroy;
 public interface IUnitofWork
 {
      IcategotyRepository CategotyRepository { get; }
-
+     IProductRepository ProductRepository { get; }
 
     void save();
 }

@@ -12,11 +12,15 @@ namespace OrdoBooks.DataAccsess.Repository
     {
         
         public IcategotyRepository CategotyRepository { get;private set; }
+
+        public IProductRepository ProductRepository { get; private set; }
+
         private readonly ApplicationDbContext _context;
         public UnitofWork(ApplicationDbContext db) 
         {
             _context = db;
             CategotyRepository = new CategoryRepository(db);
+            ProductRepository = new ProductRepository(db);
         }
          
         public void save()
