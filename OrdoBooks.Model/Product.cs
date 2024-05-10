@@ -13,9 +13,12 @@ namespace OrdoBooks.Model
 {
     public class Product
     {
+        
+        [ValidateNever]
         [Key]
-        public int Id { get; set; }
+        public int? Id { get; set; }
         [Required]
+        
         public string Title { get; set; }
         public string Description { get; set; }
         [Required]
@@ -46,7 +49,8 @@ namespace OrdoBooks.Model
         [ForeignKey("CategoryId")]
         [ValidateNever]
        public BookCategory Category { get; set; }
+        [ValidateNever]
         public string? ImageUrl { get; set; }
-
+       
     }
 }

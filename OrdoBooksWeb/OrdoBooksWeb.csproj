@@ -22,10 +22,13 @@
     <ProjectReference Include="..\OrdoBooks.DataAccsess\OrdoBooks.DataAccsess.csproj" />
     <ProjectReference Include="..\OrdoBooks.Model\OrdoBooks.Model.csproj" />
     <ProjectReference Include="..\OrdoBooks.Utility\OrdoBooks.Utility.csproj" />
+	 
   </ItemGroup>
 
   <ItemGroup>
     <Folder Include="Controllers\" />
+    <Folder Include="wwwroot\Products\" />
+	   
   </ItemGroup>
-
+	
 </Project>

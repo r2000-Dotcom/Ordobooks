@@ -1,4 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OrdoBooks.DataAccsess.Repository;
+using OrdoBooks.DataAccsess.Repository.IRepositroy;
 using OrdoBooks.Model;
 using System.Diagnostics;
 
@@ -8,16 +10,29 @@ namespace OrdoBooksWeb.Areas.Customer.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private readonly IUnitofWork unitofWork;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger,IUnitofWork unitof)
         {
             _logger = logger;
+            unitofWork = unitof;
         }
 
         public IActionResult Index()
         {
-            return View();
+            var products = unitofWork.ProductRepository.GetAll(includeProperties: "Category").ToList();
+            return View(products);
         }
+        //public IActionResult Details(int productId)
+        //{
+        //    ShoppingCart cart = new()
+        //    {
+        //        Product = unitofWork.ProductRepository.Get(u => u.Id == productId),
+        //        Count = 1,
+        //        ProductId = productId
+        //    };
+        //    return View(cart);
+        //}
 
         public IActionResult Privacy()
         {

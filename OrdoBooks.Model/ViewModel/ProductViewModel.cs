@@ -1,12 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
-using System.Web.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace OrdoBooks.Model.ViewModel
 {
     public class ProductViewModel
     {
-        public Product? Product { get; set; }
+        public ProductViewModel()
+        {
+            Product=new Product();
+
+        }
+        public Product Product { get; set; }
         [ValidateNever]
         public IEnumerable<SelectListItem>? CategoryList { get; set; }
+        
     }
 }

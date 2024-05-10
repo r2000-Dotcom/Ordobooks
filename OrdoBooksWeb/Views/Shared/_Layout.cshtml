@@ -7,10 +7,73 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" /> 
     <link rel="stylesheet" href="~/OrdoBooksWeb.styles.css" asp-append-version="true" />
-    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet" />
-    <link href="~/lib/bootstrap-icons/font/bootstrap-icons.min.css" rel="stylesheet" />
-    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" />
+    <link href="~/shared/libs/dropzone/css/dropzone.min.css" rel="stylesheet" />
+    <link href="~/shared/libs/dropify/css/dropify.min.css" rel="stylesheet" />
+    <link href="~/Shared/libs/quill/css/quill.core.css" rel="stylesheet" />
+    <link href="~/Shared/libs/quill/css/quill.snow.css" rel="stylesheet" />
+    <link href="~/Shared/libs/datatable/css/bootstrap-table.min.css" rel="stylesheet" />
+    <link href="~/Shared/libs/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    
+    <link href="~/Shared/libs/app/css/app.css" rel="stylesheet" type="text/css" id="app-style" />
+    <link href="~/Shared/libs/icon/css/icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Shared/libs/flatpickr/css/flatpickr.min.css" rel="stylesheet" type="text/css" />
+    <link href="~/Shared/libs/selectize/css/selectize.bootstrap3.css" rel="stylesheet" type="text/css" />
+    <link href="~/Shared/libs/fullcalendar/main.min.css" rel="stylesheet" />
+    <link href="~/Shared/libs/sweetalert/css/sweetalert2.min.css" rel="stylesheet" />
+    <link href="~/Shared/libs/jquery/css/jquery.steps.css" rel="stylesheet" />
+    <link href="~/Shared/libs/bootstrap/css/bootstrap-directional-buttons.css" rel="stylesheet" />
+    <link href="~/shared/libs/magnific-popup/magnific-popup.css" rel="stylesheet" />
+    <link href="~/shared/libs/bootstrap-daterangepicker/daterangepicker.css" rel="stylesheet" />
+    <link href="~/shared/libs/spectrum-colorpicker2/spectrum.min.css" rel="stylesheet" />
+    <link href="~/shared/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css" rel="stylesheet" />
+    <link href="~/shared/libs/mohithg-switchery/switchery.min.css" rel="stylesheet" />
+    <link href="~/Shared/libs/bootstrap/css/bootstrap-datepicker.min.css" rel="stylesheet" />
+    <!-- Plugins css end-->
+    <!-- Ordorite Css start -->
+    <link href="~/Shared/libs/ordorite/css/ordorite.css" asp-append-version="true" rel="stylesheet" />
+    <!-- Ordorite Css end -->
 
+
+    <script src="~/Shared/libs/vendor/js/vendor.min.js"></script>
+    <script src="~/Shared/libs/range-sliders/js/ion.rangeslider.min.js"></script>
+    <script src="~/shared/libs/jquery/js/jquery.validate.min.js"></script>
+    <script src="~/shared/libs/jquery/js/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Shared/libs/jquery/js/jquery.ui.touch.js"></script>
+    <script src="~/Shared/libs/pos/js/pos.js" asp-append-version="true"></script>
+    <script src="~/Shared/libs/common/js/common.js" asp-append-version="true"></script>
+    <script src="~/Shared/libs/head/js/head.js"></script>
+    <script src="~/Shared/libs/datatable/js/bootstrap-table.min.js"></script>
+    <script src="~/Shared/libs/sortable/js/sortable.min.js"></script>
+
+
+    <script src="~/Shared/libs/quill/js/quill.min.js"></script>
+
+    <script src="~/Shared/libs/app/js/app.min.js"></script>
+    <!-- Plugins js-->
+    <script src="~/Shared/libs/moment/js/moment.min.js"></script>
+    <script src="~/Shared/libs/flatpickr/js/flatpickr.min.js"></script>
+    <script src="~/Shared/libs/apexcharts/js/apexcharts.min.js"></script>
+    <script src="~/Shared/libs/selectize/js/standalone/selectize.min.js"></script>
+    <script src="~/Shared/libs/fullcalendar/main.js"></script>
+    <script src="~/Shared/libs/sweetalert/js/sweetalert2.all.min.js"></script>
+    <script src="~/Shared/libs/sweetalert/js/sweetalert2.min.js"></script>
+    <script src="~/Shared/libs/jquery/js/jquery.steps.js"></script>
+    <script src="~/shared/libs/dropzone/js/dropzone.min.js"></script>
+    <script src="~/shared/libs/dropify/js/dropify.min.js"></script>
+    <script src="~/shared/libs/magnific-popup/jquery.magnific-popup.min.js"></script>
+    <script src="~/shared/libs/bootstrap-maxlength/bootstrap-maxlength.min.js"></script>
+    <script src="~/shared/libs/form-advanced/form-advanced.init.js"></script>
+    <script src="~/shared/libs/mohithg-switchery/switchery.min.js"></script>
+    <script src="~/shared/libs/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js"></script>
+    <script src="~/Shared/libs/feather-icons/js/feather.min.js"></script>
+    <script src="~/shared/libs/multiselect/js/jquery.multi-select.js"></script>
+    <script src="~/shared/libs/spectrum-colorpicker2/spectrum.min.js"></script>
+    <script src="~/Shared/libs/select2/js/select2.min.js"></script>
+    <script src="~/Shared/libs/form/js/form-pickers.init.js"></script>
+    <script src="~/shared/libs/bootstrap-daterangepicker/daterangepicker.js"></script>
+    <script src="~/Shared/libs/bootstrap/js/bootstrap-datepicker.min.js"></script>
+    
+    
 </head>
 <body>
     <header>
@@ -62,9 +125,6 @@
             <i class="fas fa-ad"></i> &copy; 2023 - OrdoBooksWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
-    @await RenderSectionAsync("Scripts", required: false)
+     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

@@ -3,10 +3,12 @@ using OrdoBooks.DataAccsess.Data;
 using OrdoBooks.DataAccsess.Repository.IRepositroy;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.Mvc;
 
 namespace OrdoBooks.DataAccsess.Repository
 {
@@ -18,7 +20,8 @@ namespace OrdoBooks.DataAccsess.Repository
         {
             _context = applicationDbContext;
             _dbSet = _context.Set<T>();
-            
+            _context.Products.Include(u => u.Category).Include(u => u.CategoryId);
+
         }
         public void Add(T item)
         {
@@ -31,16 +34,43 @@ namespace OrdoBooks.DataAccsess.Repository
             _dbSet.AddRange(items);
         }
 
-        public IEnumerable<T> GetAll()
+        public IEnumerable<T> GetAll( string? includeProperties = null)
         {
             IQueryable<T> query = _dbSet;
+            
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.ToList();
         }
 
-        public T GetById(Expression<Func<T, bool>> filter)
+        public T GetById(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
         {
-            IQueryable<T> query = _dbSet;
+            IQueryable<T> query;
+            if (tracked)
+            {
+                query = _dbSet;
+
+            }
+            else
+            {
+                query = _dbSet.AsNoTracking();
+            }
+
             query = query.Where(filter);
+            if (!string.IsNullOrEmpty(includeProperties))
+            {
+                foreach (var includeProp in includeProperties
+                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+                {
+                    query = query.Include(includeProp);
+                }
+            }
             return query.FirstOrDefault();
         }
 

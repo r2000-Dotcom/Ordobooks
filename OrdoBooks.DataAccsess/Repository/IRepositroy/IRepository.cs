@@ -9,8 +9,8 @@ namespace OrdoBooks.DataAccsess.Repository.IRepositroy
 {
     public interface IRepository<T> where T : class
     {
-        IEnumerable<T> GetAll();
-        T GetById(Expression<Func<T,bool>> filter);
+        IEnumerable<T> GetAll( string? includeProperties = null);
+        public T GetById(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false);
         void Add(T item);
         void AddRange(IEnumerable<T> items);
         void Remove(T item);

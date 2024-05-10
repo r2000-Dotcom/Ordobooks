@@ -22,92 +22,69 @@ public class ProductController : Controller
         }
     public IActionResult Index()
     {
-        var products = _iunitwork.ProductRepository.GetAll().ToList();
-        return View(products);
-    }
-    public IActionResult CreateNewProduct()
-    {
-        var categotylist = this._iunitwork.CategotyRepository.GetAll().ToList().Select(x => new SelectListItem {Text=x.Name,Value=x.CategoryId.ToString() });
-        ViewBag.categotylist = categotylist;
         return View();
     }
-    [HttpPost]
-    public IActionResult CreateNewProduct(Product obj)
-    {
-      if (ModelState.IsValid)
-        {
-            if (obj != null)
-            {
-                _iunitwork.ProductRepository.Add(obj);
-                _iunitwork.ProductRepository.save();
-                TempData["Succsess"] = "Category Created Succsessfully";
-                return RedirectToAction("Index");
-            }
-        }
-        return View();
-    }
+    
     public IActionResult UpSert(int? id)
     {
         var Model = new ProductViewModel();
-
-
-        if (id == null || id == 0)
-        {
-            return View();
-        }
         var categotylist = this._iunitwork.CategotyRepository.GetAll().ToList().Select(x => new SelectListItem { Text = x.Name, Value = x.CategoryId.ToString() });
-        Model.CategoryList = (IEnumerable<System.Web.Mvc.SelectListItem>?)categotylist;
+        Model.CategoryList = categotylist;
         var product = _iunitwork.ProductRepository.GetById(x => x.Id == id);
         Model.Product = product;
-        if (product == null)
-        {
-            return NotFound();
-        }
-
+        
         return View(Model);
     }
     [HttpPost]
-    public IActionResult UpSert(Product obj)
+    public IActionResult UpSert(ProductViewModel obj, IFormFile files)
     {
-        if (ModelState.IsValid)
-        {
-            if (obj != null)
+
+            if (ModelState.IsValid)
             {
-                if (obj.Id>0)
+            if (files != null)
+            {
+                var rootFilepath = _webHostEnvironment.WebRootPath;
+                var finalpath = Path.Combine(rootFilepath, "Products");
+                var fileName = Path.GetFileName(files.FileName);
+                var imageUrl = Path.Combine(finalpath, fileName);
+                if (!Directory.Exists(finalpath))
                 {
-                    _iunitwork.ProductRepository.Update(obj);
+                    Directory.CreateDirectory(finalpath);
+
+                }
+                using (var fileStream = new FileStream(Path.Combine(finalpath, fileName), FileMode.Create))
+                {
+                    files.CopyTo(fileStream);
+                }
+                obj.Product.ImageUrl= @"\"+ "Products" + @"\"+ fileName;
+            }
+            if (obj.Product.Id > 0)
+                {
+                    _iunitwork.ProductRepository.Update(obj.Product);
                     _iunitwork.ProductRepository.save();
                     TempData["Succsess"] = "Category Edited Succsessfully";
                 }
                 else
                 {
-                    _iunitwork.ProductRepository.Add(obj);
+                    _iunitwork.ProductRepository.Add(obj.Product);
                     _iunitwork.ProductRepository.save();
                     TempData["Succsess"] = "Category Added Succsessfully";
                 }
-                
+
+            
+
                 return RedirectToAction("Index");
             }
-        }
-        return View();
+            else
+            {
+                var categotylist = this._iunitwork.CategotyRepository.GetAll().ToList().Select(x => new SelectListItem { Text = x.Name, Value = x.CategoryId.ToString() });
+                obj.CategoryList = categotylist;
+                return View(obj);
+            }
     }
     
-    public IActionResult Delete(int? id)
-    {
-        if (id == null || id == 0)
-        {
-            return NotFound();
-        }
 
-        var Books = _iunitwork.ProductRepository.GetById(x => x.Id == id);
-        if (Books == null)
-        {
-            return NotFound();
-        }
-
-        return View(Books);
-    }
-    [HttpPost, ActionName("Delete")]
+    
     public IActionResult DeletePost(int? id)
     {
         var Books = _iunitwork.ProductRepository.GetById(x => x.Id == id);
@@ -121,7 +98,28 @@ public class ProductController : Controller
         return RedirectToAction("Index");
      }
 
+    #region ProdctApi
+    [HttpGet]
+    public async Task<JsonResult> ProductListData()
+    {
+        var products =  _iunitwork.ProductRepository.GetAll(includeProperties: "Category").ToList();
+        var Count = products.Count;
+        var data = new
+        {
+            rows = products,
+            Count = products.Count,
+        };
 
+
+        return Json(data);
+    }
+
+
+
+
+
+
+    #endregion
 
 
 

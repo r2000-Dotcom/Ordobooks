@@ -1,15 +1,16 @@
 ﻿@model List<Product>
 
+
 <div class="card show border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
-                <h2 class="text-white py-2">Product List</h2>
+                <h2 class="text-white py-2" >Product List</h2>
             </div>
         </div>
 
     </div>
-    <div class="card-body p-4">
+    <div class=" container card-body p-4">
         <div class="row  pb-3">
             <div class="col-6">
                
@@ -20,51 +21,83 @@
                 </a>
 
             </div>
-
-
         </div>
 
-        <table class="table table-bordered table-striped" style="border:2px;color:aliceblue">
-            <thead class="border border-primary">
-                <tr>
-                    <th>Title</th>
-                    <th>Isbn</th>
-                    <th>Author</th>
-                    <th>Last Price</th>
-                    <th>Price</th>
-                    <th>Price50</th>
-                    <th>Price100</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Title</td>
-                        <td>@item.ISBN</td>
-                        <td>@item.Author</td>
-                        <td>@item.ListPrice</td>
-                        <td>@item.Price</td>
-                        <td>@item.Price50</td>
-                        <td>@item.Price100</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Product" asp-route-id="@item.Id" asp-action="UpSert" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a asp-controller="Product" asp-route-id="@item.Id" asp-action="Delete" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash"></i>
-                                </a>
-
-
-                            </div>
-                        </td>
-
-
-                    </tr>
-                }
-            </tbody>
+        <table id="customerledgertable"
+               data-toggle="table"
+               data-side-pagination="server"
+               data-buttons-class="xs btn-light"
+              
+               class="table table-bordered table-hover table-borderless">
         </table>
     </div>
 </div>
+<script type="text/javascript">
+
+    $('#customerledgertable').show();
+    $('#customerledgertable').bootstrapTable({
+        method: 'get',
+        url: '/Admin/Product/ProductListData',
+        ajaxOption: { traditional: true },
+        queryParams: function (p) {
+            return {
+
+               Limit: p.limit,
+                Search: p.search,
+                Offset: p.offset,
+                Order: p.order,
+            };
+        },
+        cache: true,
+        striped: true,
+        pagination: true,
+        search: true,
+        pageSize: 10,
+        pageList: [10, 20, 50],
+        hideLoading: false,
+        showLoading: true,
+        
+        columns: [
+            { field: 'title', title: 'Title' },
+            { field: 'isbn', title: 'ISBN' },
+            { field: 'listPrice', title: 'User' },
+            { field: 'author', title: 'TransType' },
+            { field: 'category.name', title: 'Reference' },
+            {
+                field: 'bIRTReportURL', title: 'Action', formatter: (value, row, index, field) => {
+
+                    return `<div class="w-75 btn-group" role="group">
+                         <a href="/Admin/product/upsert?id=${row.id}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                     <a onClick=Delete('/Admin/product/DeletePost/${row.id}') class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                        </div>`
+                }
+            }
+        ]
+    });
+
+
+    function Delete(url) {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                    url: url,
+                    type: 'DELETE',
+                    success: function (data) {
+                        $('#customerledgertable').refresh();
+                        toastr.success(data.message);
+                    }
+                })
+            }
+        })
+    }
+</script>
+
+
