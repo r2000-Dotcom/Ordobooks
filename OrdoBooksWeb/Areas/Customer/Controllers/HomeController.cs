@@ -23,16 +23,11 @@ namespace OrdoBooksWeb.Areas.Customer.Controllers
             var products = unitofWork.ProductRepository.GetAll(includeProperties: "Category").ToList();
             return View(products);
         }
-        //public IActionResult Details(int productId)
-        //{
-        //    ShoppingCart cart = new()
-        //    {
-        //        Product = unitofWork.ProductRepository.Get(u => u.Id == productId),
-        //        Count = 1,
-        //        ProductId = productId
-        //    };
-        //    return View(cart);
-        //}
+        public IActionResult Details(int productId)
+        {
+            var product = unitofWork.ProductRepository.GetById(x => x.Id == productId, includeProperties: "Category");
+            return View(product);
+        }
 
         public IActionResult Privacy()
         {

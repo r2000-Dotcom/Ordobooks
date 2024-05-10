@@ -29,7 +29,7 @@
 
                             </div><div class="form-floating py-2 col-12">
                                 <label asp-for="Product.Description" class="ms-2 text-muted"></label>
-                                <textarea asp-for="Product.Description" class="form-control border-0 shadow" name="ShortDescriptionEditor" Style="display:none"></textarea>
+                                <textarea class="form-control" id=" asc" name="editor" ></textarea>
                             </div><div class="form-floating py-2 col-12">
                                 <input asp-for="Product.Author" type="text" class="form-control border-0 shadow" />
                                 <label class="ms-2" asp-for="Product.Author"></label>
@@ -135,8 +135,8 @@
 <script src="~/shared/libs/form-advanced/form-advanced.init.js"></script>
 
 <script type="text/javascript">
-
-    var ShortDescriptionEditor = new Quill("#snow", { theme: "snow", modules: { toolbar: [[{ font: [] }, { size: [] }], ["bold", "italic", "underline", "strike"], [{ color: [] }, { background: [] }], [{ script: "super" }, { script: "sub" }], [{ header: [!1, 1, 2, 3, 4, 5, 6] }, "blockquote", "code-block"], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["direction", { align: [] }], ["link", "image", "video"], ["clean"]] } }); $(".select2").select2({ width: "100%" })
+  
+     new Quill("#asc", { theme: "snow", modules: { toolbar: [[{ font: [] }, { size: [] }], ["bold", "italic", "underline", "strike"], [{ color: [] }, { background: [] }], [{ script: "super" }, { script: "sub" }], [{ header: [!1, 1, 2, 3, 4, 5, 6] }, "blockquote", "code-block"], [{ list: "ordered" }, { list: "bullet" }, { indent: "-1" }, { indent: "+1" }], ["direction", { align: [] }], ["link", "image", "video"], ["clean"]] } }); $(".select2").select2({ width: "100%" })
 </script>
 
        
