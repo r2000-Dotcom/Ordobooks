@@ -1,10 +1,11 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using OrdoBooks.Model;
 
 namespace OrdoBooks.DataAccsess.Data
 {
-    public class ApplicationDbContext : IdentityDbContext
+    public class ApplicationDbContext : IdentityDbContext<IdentityUser>
     {
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) 
@@ -13,6 +14,8 @@ namespace OrdoBooks.DataAccsess.Data
         }
       public DbSet<BookCategory> BookCategories { get; set; }
         public DbSet<Product> Products { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder) 
         {
             base.OnModelCreating(modelBuilder);
