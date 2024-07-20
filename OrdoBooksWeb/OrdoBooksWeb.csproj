@@ -75,5 +75,12 @@
 	  <None Include="Areas\Identity\Pages\_ViewStart.cshtml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Content Update="Areas\Admin\Views\Company\UpSert.cshtml">
+	    <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+	    <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+	  </Content>
+	</ItemGroup>
+
 
 </Project>

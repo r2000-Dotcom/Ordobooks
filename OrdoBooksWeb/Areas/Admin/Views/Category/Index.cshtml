@@ -1,6 +1,4 @@
-﻿@model List<BookCategory>
-
-<div class="card show border-0 mt-4">
+﻿<div class="card show border-0 mt-4">
     <div class="card-header bg-secondary bg-gradient ml-0 py-3">
         <div class="row">
             <div class="col-12 text-center">
@@ -24,37 +22,53 @@
 
         </div>
 
-        <table class="table table-bordered table-striped" style="border:2px;color:aliceblue">
-            <thead class="border border-primary">
-                <tr>
-                    <th>Category Name</th>
-                    <th>Dispaly Order</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var item in Model)
-                {
-                    <tr>
-                        <td>@item.Name</td>
-                        <td>@item.DisplayOrder</td>
-                        <td>
-                            <div class="w-75 btn-group" role="group">
-                                <a asp-controller="Category" asp-route-id="@item.CategoryId" asp-action="EditCategory" class="btn btn-primary mx-2">
-                                    <i class="bi bi-pencil"></i>
-                                </a>
-                                <a asp-controller="Category" asp-route-id="@item.CategoryId" asp-action="Delete" class="btn btn-danger mx-2">
-                                    <i class="bi bi-trash"></i>
-                                </a>
+        <table id="tableproduct">
 
-
-                            </div>
-                        </td>
-
-
-                    </tr>
-                }
-            </tbody>
         </table>
     </div>
 </div>
+<script type="text/javascript">
+
+    $('#tableproduct').show();
+    $('#tableproduct').bootstrapTable({
+        method: 'get',
+        url: '/Admin/Category/CategoryListData',
+        ajaxOption: { traditional: true },
+        queryParams: function (p) {
+            return {
+
+                Limit: p.limit,
+                Search: p.search,
+                Offset: p.offset,
+                Order: p.order,
+            };
+        },
+        cache: true,
+        striped: true,
+        pagination: true,
+        search: true,
+        pageSize: 10,
+        pageList: [10, 20, 50],
+        hideLoading: false,
+        showLoading: true,
+
+        columns: [
+            { field: 'name', title: 'Category Name' },
+            { field: 'displayOrder', title: 'Dispaly Order' },
+            {
+                field: 'bIRTReportURL', title: 'Action', formatter: (value, row, index, field) => {
+
+                    return `<div class="w-75 btn-group" role="group">
+                                         <a href="/Admin/Category/EditCategory?id=${row.categoryId}" class="btn btn-primary mx-2"> <i class="bi bi-pencil-square"></i> Edit</a>
+                                                     <a href='/Admin/Category/Delete/${row.categoryId}' class="btn btn-danger mx-2"> <i class="bi bi-trash-fill"></i> Delete</a>
+                            </div>`
+                }
+            }
+        ]
+    });
+
+
+  
+
+
+</script>

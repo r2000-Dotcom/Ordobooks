@@ -1,11 +1,15 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using OrdoBooks.DataAccsess.Data;
 using OrdoBooks.DataAccsess.Repository.IRepositroy;
 using OrdoBooks.Model;
+using OrdoBooks.Utility;
+
 
 namespace OrdoBooksWeb.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles =SD.Role_Admin)]
     public class CategoryController : Controller
     {
         private readonly IUnitofWork _iunitwork;
@@ -17,8 +21,7 @@ namespace OrdoBooksWeb.Areas.Admin.Controllers
         }
         public IActionResult Index()
         {
-            var CategotyList = _iunitwork.CategotyRepository.GetAll().OrderBy(x => x.DisplayOrder).ToList();
-            return View(CategotyList);
+            return View();
         }
         public IActionResult CreateNewCategory()
         {
@@ -108,5 +111,30 @@ namespace OrdoBooksWeb.Areas.Admin.Controllers
             }
             return View();
         }
+        #region Api
+
+        public async Task<JsonResult> CategoryListData()
+        {
+            var products = _iunitwork.CategotyRepository.GetAll().ToList();
+            var Count = products.Count;
+            var data = new
+            {
+                rows = products,
+                Total = products.Count,
+            };
+
+
+            return Json(data);
+        }
+
+
+
+
+
+
+
+        #endregion
     }
 }
+
+

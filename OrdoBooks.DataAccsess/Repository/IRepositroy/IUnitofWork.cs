@@ -10,6 +10,7 @@ public interface IUnitofWork
 {
      IcategotyRepository CategotyRepository { get; }
      IProductRepository ProductRepository { get; }
+    IcompanyRepository CompanyRepository { get; }
 
     void save();
 }

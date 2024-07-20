@@ -92,7 +92,7 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
-                        
+                        @if (User.IsInRole(SD.Role_Admin)){
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                 Management
@@ -104,10 +104,14 @@
                                 <li class="nav-item">
                                     <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Product</a>
                                 </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-dark" asp-area="Admin" asp-controller="Company" asp-action="Index">Company</a>
+                                    </li>
                                 <li><hr class="dropdown-divider"></li>
                                 
                             </ul>
                         </li>
+                        }
                     </ul>
                     <partial name="_LoginPartial" />
                 </div>
@@ -121,11 +125,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer bg-primary text-muted">
-        <div class="container">
-            <i class="fas fa-ad"></i> &copy; 2023 - OrdoBooksWeb - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+ 
      @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>

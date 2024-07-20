@@ -1,15 +1,13 @@
-﻿using OrdoBooks.Models;
-using Microsoft.AspNetCore.HttpOverrides;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
-using OrdoBooks.DataAccsess.Migrations;
-using OrdoBooks.DataAccsess.Repository;
 using OrdoBooks.DataAccsess.Repository.IRepositroy;
-using OrdoBooks.Model;
 using OrdoBooks.Model.ViewModel;
+using OrdoBooks.Utility;
 
 namespace OrdoBooksWeb.Areas.Admin.Controllers;
 [Area("Admin")]
+[Authorize(Roles = SD.Role_Admin)]
 public class ProductController : Controller
 {
    
@@ -107,7 +105,7 @@ public class ProductController : Controller
         var data = new
         {
             rows = products,
-            Count = products.Count,
+            Total = products.Count,
         };
 
 

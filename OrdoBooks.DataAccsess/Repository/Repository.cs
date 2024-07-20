@@ -1,82 +1,75 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OrdoBooks.DataAccsess.Data;
 using OrdoBooks.DataAccsess.Repository.IRepositroy;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Web.Mvc;
 
-namespace OrdoBooks.DataAccsess.Repository
+
+namespace OrdoBooks.DataAccsess.Repository;
+
+public class Repository<T> : IRepository<T> where T : class
 {
-    public class Repository<T> : IRepository<T> where T : class
+    private readonly ApplicationDbContext _context;
+    private readonly DbSet<T> _dbSet;
+    public Repository(ApplicationDbContext applicationDbContext)
     {
-        private readonly ApplicationDbContext _context;
-        private readonly DbSet<T> _dbSet;
-        public Repository(ApplicationDbContext applicationDbContext)
-        {
-            _context = applicationDbContext;
-            _dbSet = _context.Set<T>();
-            _context.Products.Include(u => u.Category).Include(u => u.CategoryId);
+        _context = applicationDbContext;
+        _dbSet = _context.Set<T>();
+        _context.Products.Include(u => u.Category).Include(u => u.CategoryId);
 
-        }
-        public void Add(T item)
-        {
-            _dbSet.Add(item);
-            
-        }
+    }
+    public void Add(T item)
+    {
+        _dbSet.Add(item);
+        
+    }
 
-        public void AddRange(IEnumerable<T> items)
-        {
-            _dbSet.AddRange(items);
-        }
+    public void AddRange(IEnumerable<T> items)
+    {
+        _dbSet.AddRange(items);
+    }
 
-        public IEnumerable<T> GetAll( string? includeProperties = null)
+    public IEnumerable<T> GetAll( string? includeProperties = null)
+    {
+        IQueryable<T> query = _dbSet;
+        
+        if (!string.IsNullOrEmpty(includeProperties))
         {
-            IQueryable<T> query = _dbSet;
-            
-            if (!string.IsNullOrEmpty(includeProperties))
+            foreach (var includeProp in includeProperties
+                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
             {
-                foreach (var includeProp in includeProperties
-                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProp);
-                }
+                query = query.Include(includeProp);
             }
-            return query.ToList();
         }
+        return query.ToList();
+    }
 
-        public T GetById(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
+    public T GetById(Expression<Func<T, bool>> filter, string? includeProperties = null, bool tracked = false)
+    {
+        IQueryable<T> query;
+        if (tracked)
         {
-            IQueryable<T> query;
-            if (tracked)
-            {
-                query = _dbSet;
+            query = _dbSet;
 
-            }
-            else
-            {
-                query = _dbSet.AsNoTracking();
-            }
-
-            query = query.Where(filter);
-            if (!string.IsNullOrEmpty(includeProperties))
-            {
-                foreach (var includeProp in includeProperties
-                    .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
-                {
-                    query = query.Include(includeProp);
-                }
-            }
-            return query.FirstOrDefault();
         }
-
-        public void Remove(T item)
+        else
         {
-            _dbSet.Remove(item);
+            query = _dbSet.AsNoTracking();
         }
+
+        query = query.Where(filter);
+        if (!string.IsNullOrEmpty(includeProperties))
+        {
+            foreach (var includeProp in includeProperties
+                .Split(new char[] { ',' }, StringSplitOptions.RemoveEmptyEntries))
+            {
+                query = query.Include(includeProp);
+            }
+        }
+        return query.FirstOrDefault();
+    }
+
+    public void Remove(T item)
+    {
+        _dbSet.Remove(item);
     }
 }
